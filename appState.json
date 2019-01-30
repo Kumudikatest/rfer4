@@ -1,0 +1,149 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "fab6a499-2e72-42db-9ace-74f30cec9fc1": {
+        "id": "fab6a499-2e72-42db-9ace-74f30cec9fc1",
+        "parent": null,
+        "name": "rfer4",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "8e488438-762c-4fc5-aca7-e03ae72d4c64"
+        ],
+        "isRemovable": false,
+        "filePath": "rfer4"
+      },
+      "8e488438-762c-4fc5-aca7-e03ae72d4c64": {
+        "id": "8e488438-762c-4fc5-aca7-e03ae72d4c64",
+        "parent": "fab6a499-2e72-42db-9ace-74f30cec9fc1",
+        "name": "lambda.js",
+        "type": "LAMBDA_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "rfer4/lambda.js",
+        "code": "let AWS = require('aws-sdk');\nconst s3 = new AWS.S3();\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = function (event, context, callback) {\n    ddb.scan({\n        TableName: 'UserSwaggerSubscriptions'\n    }).promise().then(function (data) {\n        //your logic goes here\n    }).catch(function (err) {\n        //handle error\n    });\n    s3.listObjects({\n        'Bucket': 'cloud9-ktest',\n        'MaxKeys': 10,\n        'Prefix': ''\n    }).promise()\n        .then(data => {\n            console.log(data);           // successful response\n            /*\n            data = {\n             Contents: [\n                {\n                   ETag: \"\\\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\\\"\",\n                   Key: \"example1.jpg\",\n                   LastModified: <Date Representation>,\n                   Owner: {\n                      DisplayName: \"myname\",\n                      ID: \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                   },\n                   Size: 11,\n                   StorageClass: \"STANDARD\"\n                },\n                {...}\n            */\n        })\n        .catch(err => {\n            console.log(err, err.stack); // an error occurred\n        });\n\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "triggers": [
+          {
+            "resourceName": "apigusEast1TestAPIMyLambdapost",
+            "config": {}
+          }
+        ],
+        "config": {
+          "runtime": "nodejs8.10",
+          "timeout": 60,
+          "memory": 128
+        }
+      }
+    },
+    "deletedFiles": [],
+    "rootNode": "fab6a499-2e72-42db-9ace-74f30cec9fc1",
+    "openFiles": [
+      "8e488438-762c-4fc5-aca7-e03ae72d4c64"
+    ],
+    "currentFileId": "8e488438-762c-4fc5-aca7-e03ae72d4c64",
+    "resources": {
+      "apigusEast1TestAPIMyLambdapost": {
+        "name": "apigusEast1TestAPIMyLambdapost",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 1,
+          "apiName": "TestAPI",
+          "apiId": "0itznun7w3",
+          "endpointType": "EDGE",
+          "rootResourceId": "h2lelj6j7k",
+          "existingResources": {
+            "/MyLambda": "98nqbj",
+            "/": "h2lelj6j7k",
+            "/testtwospeciallambda": "q4szm3",
+            "/1234": "s8tcca",
+            "/testtwospecialkumutest": "wey3lk"
+          },
+          "resourceMode": 1,
+          "resourcePath": "/MyLambda",
+          "resourceName": "MyLambda",
+          "resourceId": "98nqbj",
+          "restMethod": "POST",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 1,
+          "stageName": "Test",
+          "stageDeploymentId": "dn8bzt"
+        },
+        "globallyEditable": false
+      },
+      "ddbUserSwaggerSubscriptions": {
+        "name": "ddbUserSwaggerSubscriptions",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 1,
+          "operation": "scan",
+          "table": {
+            "arn": "arn:aws:dynamodb:us-east-1:318300609668:table/UserSwaggerSubscriptions",
+            "name": "UserSwaggerSubscriptions",
+            "partitionKey": "username",
+            "partitionKeyType": "S",
+            "hasSortKey": true,
+            "sortKey": "apiName",
+            "sortKeyType": "S",
+            "mode": 1
+          },
+          "parameters": {
+            "Key": {},
+            "Item": {},
+            "ExpressionAttributeValues": {}
+          },
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
+        },
+        "globallyEditable": false
+      },
+      "s3cloud9Ktest": {
+        "name": "s3cloud9Ktest",
+        "type": "S3",
+        "config": {
+          "mode": 1,
+          "bucket": {
+            "region": "us-east-1",
+            "name": "cloud9-ktest"
+          }
+        },
+        "globallyEditable": false
+      }
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    },
+    "lambdaId": "8e488438-762c-4fc5-aca7-e03ae72d4c64"
+  },
+  "PROJECT_META": {
+    "projectName": "rfer4",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1548848782812
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "rfer4",
+      "url": "https://github.com/Kumudikatest/rfer4"
+    }
+  }
+}
